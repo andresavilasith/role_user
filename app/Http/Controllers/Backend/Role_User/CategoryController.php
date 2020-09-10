@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Backend\Role_User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CategoryRequest;
+use App\Role_User\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class CategoryController extends Controller
 {
@@ -14,7 +17,13 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        Gate::authorize('haveaccess', 'category.index');
+
+        $categories = Category::orderBy('id', 'Desc')->paginate(6);
+
+        return view('category.index', [
+            'categories' => $categories
+        ]);
     }
 
     /**
@@ -24,18 +33,26 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        Gate::authorize('haveaccess', 'category.create');
+        
+        return view('category.create');
     }
-
+    
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
-        //
+        Gate::authorize('haveaccess', 'category.create');
+        Category::create([
+            'name' => $request->name,
+            'description' => $request->description
+        ]);
+
+        return redirect('/category');
     }
 
     /**
@@ -44,9 +61,13 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Category $category)
     {
-        //
+        Gate::authorize('haveaccess', 'category.show');
+
+        return view('category.show', [
+            'category' => $category
+        ]);
     }
 
     /**
@@ -55,9 +76,10 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Category $category)
     {
-        //
+        Gate::authorize('haveaccess', 'category.edit');
+        return view('category.edit', compact('category'));
     }
 
     /**
@@ -67,19 +89,30 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CategoryRequest $request, Category $category)
     {
-        //
-    }
+        Gate::authorize('haveaccess', 'category.edit');
+        $category->update([
+            'name'=>$request->name,
+            'description'=>$request->description,
+            ]);
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+            return redirect('/category');
+        }
+        
+        /**
+         * Remove the specified resource from storage.
+         *
+         * @param  int  $id
+         * @return \Illuminate\Http\Response
+         */
+        public function destroy(Category $category)
+        {
+            
+            Gate::authorize('haveaccess', 'category.destroy');
+
+            $category->delete();
+
+            return redirect('/category');
     }
 }

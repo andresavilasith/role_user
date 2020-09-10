@@ -3,7 +3,11 @@
 namespace App\Http\Controllers\Backend\Role_User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\RoleRequest;
+use App\Role_User\Models\Permission;
+use App\Role_User\Models\Role;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class RoleController extends Controller
 {
@@ -14,7 +18,11 @@ class RoleController extends Controller
      */
     public function index()
     {
-        //
+        Gate::authorize('haveaccess', 'role.index');
+
+        $roles = Role::orderBy('id', 'Desc')->paginate(6);
+
+        return view('role.index', compact('roles'));
     }
 
     /**
@@ -24,7 +32,11 @@ class RoleController extends Controller
      */
     public function create()
     {
-        //
+        Gate::authorize('haveaccess', 'role.create');
+        $permissions = Permission::all();
+        return view('role.create', [
+            'permissions' => $permissions
+        ]);
     }
 
     /**
@@ -33,9 +45,24 @@ class RoleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(RoleRequest $request)
     {
-        //
+        Gate::authorize('haveaccess', 'role.create');
+
+        $role = Role::create([
+            'name' => $request->name,
+            'slug' => $request->slug,
+            'description' => $request->description,
+            'full_access' => $request->full_access
+        ]);
+
+
+        if ($request->get('permission')) {
+            $role->permissions()->sync($request->get('permission'));
+        }
+
+
+        return redirect()->route('role.index')->with('status_success', 'Role updated successfully');
     }
 
     /**
@@ -44,9 +71,23 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Role $role)
     {
-        //
+        Gate::authorize('haveaccess', 'role.show');
+
+        $permissions = Permission::all();
+
+        $permission_role = [];
+
+        foreach ($role->permissions as $permission) {
+            $permission_role[] = $permission->id;
+        }
+
+        return view('role.show', [
+            'role' => $role,
+            'permissions' => $permissions,
+            'permission_role' => $permission_role
+        ]);
     }
 
     /**
@@ -55,9 +96,23 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Role $role)
     {
-        //
+        Gate::authorize('haveaccess', 'role.edit');
+
+        $permissions = Permission::all();
+
+        $permission_role = [];
+
+        foreach ($role->permissions as $permission) {
+            $permission_role[] = $permission->id;
+        }
+
+        return view('role.edit', [
+            'role' => $role,
+            'permissions' => $permissions,
+            'permission_role' => $permission_role
+        ]);
     }
 
     /**
@@ -67,9 +122,24 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(RoleRequest $request, Role $role)
     {
-        //
+        Gate::authorize('haveaccess', 'role.edit');
+
+        $role->update([
+            'name' => $request->name,
+            'slug' => $request->slug,
+            'description' => $request->description,
+            'full_access' => $request->full_access
+        ]);
+
+
+        if ($request->get('permission')) {
+            $role->permissions()->sync($request->get('permission'));
+        }
+
+
+        return redirect()->route('role.show', $role->id)->with('status_success', 'Role updated successfully');
     }
 
     /**
@@ -78,8 +148,12 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Role $role)
     {
-        //
+        Gate::authorize('haveaccess', 'role.destroy');
+
+        $role->delete();
+
+        return redirect()->route('role.index')->with('status_success', 'Role deleted successfully');
     }
 }

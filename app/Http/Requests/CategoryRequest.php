@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class RoleRequest extends FormRequest
+class CategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,21 +23,19 @@ class RoleRequest extends FormRequest
      */
     public function rules()
     {
-        //Ubtener el rol
-        $role = $this->route('role');
+        //Obtener el rol
+        $category = $this->route('category');
 
         //Si el rol existe se puede quedar con los mismos datos pero no duplicar los datos de otros
-        if ($role) {
+        if ($category) {
             return [
-                'name' => 'required|max:50|unique:roles,name,' . $role->id,
-                'slug' => 'required|max:50|unique:roles,slug,' . $role->id,
-                'full_access' => 'required|in:yes,no',
+                'name' => 'required|max:50|unique:categories,name,' . $category->id,
+                'description' => 'required|max:50|unique:categories,description,' . $category->id,
             ];
         } else {
             return [
-                'name' => 'required|max:50|unique:roles,name',
-                'slug' => 'required|max:50|unique:roles,slug',
-                'full_access' => 'required|in:yes,no',
+                'name' => 'required|max:50|unique:categories,name',
+                'description' => 'required|max:50|unique:categories,description',
             ];
         }
     }

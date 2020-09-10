@@ -60,7 +60,7 @@ class UserController extends Controller
 
         $roles = Role::orderBy('name')->get();
 
-        return view('user.view', compact('user', 'roles'));
+        return view('user.show', compact('user', 'roles'));
     }
 
     /**

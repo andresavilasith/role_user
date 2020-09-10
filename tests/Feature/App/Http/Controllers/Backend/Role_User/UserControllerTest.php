@@ -59,7 +59,7 @@ class UserControllerTest extends TestCase
         
         
         
-        $response->assertViewIs('user.view');
+        $response->assertViewIs('user.show');
         
         $response->assertViewHas('user', $user);
         $response->assertViewHas('roles', $roles);

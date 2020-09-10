@@ -36,7 +36,9 @@ class DefaultDataSeed
         factory(Category::class, 2)->create();
 
 
-        factory(Permission::class, 3)->create();
+        $category=Category::first();
+
+        factory(Permission::class, 2)->create();
 
         $permissions = Permission::all();
 
@@ -57,4 +59,5 @@ class DefaultDataSeed
             );
         });
     }
+
 }

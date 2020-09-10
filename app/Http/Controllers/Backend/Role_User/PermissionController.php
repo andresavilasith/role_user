@@ -3,7 +3,11 @@
 namespace App\Http\Controllers\Backend\Role_User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PermissionRequest;
+use App\Role_User\Models\Category;
+use App\Role_User\Models\Permission;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class PermissionController extends Controller
 {
@@ -14,7 +18,11 @@ class PermissionController extends Controller
      */
     public function index()
     {
-        //
+        Gate::authorize('haveaccess', 'permission.index');
+
+        $permissions = Permission::orderBy('id', 'Desc')->paginate(7);
+
+        return view('permission.index', compact('permissions'));
     }
 
     /**
@@ -24,7 +32,13 @@ class PermissionController extends Controller
      */
     public function create()
     {
-        //
+        Gate::authorize('haveaccess', 'permission.create');
+
+        $categories = Category::all();
+
+        return view('permission.create', [
+            'categories' => $categories
+        ]);
     }
 
     /**
@@ -33,9 +47,18 @@ class PermissionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PermissionRequest $request)
     {
-        //
+        Gate::authorize('haveaccess', 'permission.create');
+
+        Permission::create([
+            'category_id' => $request->category_id,
+            'name' => $request->name,
+            'slug' => $request->slug,
+            'description' => $request->description
+        ]);
+
+        return redirect('/permission');
     }
 
     /**
@@ -44,9 +67,12 @@ class PermissionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Permission $permission)
     {
-        //
+        Gate::authorize('haveaccess', 'permission.show');
+        return view('permission.show', [
+            'permission' => $permission
+        ]);
     }
 
     /**
@@ -55,9 +81,12 @@ class PermissionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Permission $permission)
     {
-        //
+        Gate::authorize('haveaccess', 'permission.edit');
+        return view('permission.edit',[
+            'permission'=>$permission
+        ]);
     }
 
     /**
@@ -67,9 +96,18 @@ class PermissionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PermissionRequest $request, Permission $permission)
     {
-        //
+        Gate::authorize('haveaccess', 'permission.edit');
+        $permission->update([
+            'category_id' => $request->category_id,
+            'name' => $request->name,
+            'slug' => $request->slug,
+            'description' => $request->description
+        ]);
+
+        return redirect('/permission');
+
     }
 
     /**
@@ -78,8 +116,12 @@ class PermissionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Permission $permission)
     {
-        //
+        Gate::authorize('haveaccess', 'permission.destroy');
+
+        $permission->delete();
+
+        return redirect('/permission');
     }
 }
