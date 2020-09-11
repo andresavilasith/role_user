@@ -4,9 +4,9 @@ namespace App\Helpers;
 
 use Illuminate\Support\Facades\DB;
 use App\User;
-Use App\Role_User\Models\Role;
-use App\Role_User\Models\Category;
-use App\Role_User\Models\Permission;
+use App\Models\Role_User\Role;
+use App\Models\Role_User\Category;
+use App\Models\Role_User\Permission;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class DefaultDataSeed

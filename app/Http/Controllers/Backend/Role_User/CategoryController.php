@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Backend\Role_User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryRequest;
-use App\Role_User\Models\Category;
+use App\Models\Role_User\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 

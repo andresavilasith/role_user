@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Role_User\Models;
+namespace App\Models\Role_User;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,6 +10,6 @@ class Category extends Model
 
     public function permissions()
     {
-        return $this->hasMany('App\Role_User\Models\Permission');
+        return $this->hasMany('App\Models\Role_User\Permission');
     }
 }

@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Backend\Role_User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PermissionRequest;
-use App\Role_User\Models\Category;
-use App\Role_User\Models\Permission;
+use App\Models\Role_User\Category;
+use App\Models\Role_User\Permission;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 

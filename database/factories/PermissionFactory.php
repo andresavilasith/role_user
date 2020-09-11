@@ -2,7 +2,7 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Role_User\Models\Permission;
+use App\Models\Role_User\Permission;
 use Faker\Generator as Faker;
 
 $factory->define(Permission::class, function (Faker $faker) {

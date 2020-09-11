@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Role_User\Models;
+namespace App\Models\Role_User;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,11 +10,11 @@ class Permission extends Model
 
     public function category()
     {
-        return $this->belongsTo('App\Role_User\Models\Category', 'category_id');
+        return $this->belongsTo('App\Models\Role_User\Category', 'category_id');
     }
 
     public function roles()
     {
-        return $this->belongsToMany('App\Role_User\Models\Role')->withTimestamps();
+        return $this->belongsToMany('App\Models\Role_User\Role')->withTimestamps();
     }
 }

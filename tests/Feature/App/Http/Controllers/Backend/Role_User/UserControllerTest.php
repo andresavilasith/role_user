@@ -8,7 +8,7 @@ use Tests\TestCase;
 use App\User;
 use Illuminate\Support\Facades\Gate;
 use App\Helpers\DefaultDataSeed;
-use App\Role_User\Models\Role;
+use App\Models\Role_User\Role;
 
 class UserControllerTest extends TestCase
 {

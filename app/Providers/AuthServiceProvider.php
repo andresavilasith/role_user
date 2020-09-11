@@ -26,8 +26,6 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        $this->registerPolicies();
-
         //control de accesos
         //Contiene el usuario autenticado y se aplica si esta logueado
         Gate::define('haveaccess', function (User $user, $perm) {

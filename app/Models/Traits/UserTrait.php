@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Role_User\Traits;
+namespace App\Models\Traits;
 
 trait UserTrait
 {
     public function roles()
     {
-        return $this->belongsToMany('App\Role_User\Models\Role')->withTimestamps();
+        return $this->belongsToMany('App\Models\Role_User\Role')->withTimestamps();
     }
 
     public function havePermission($permission)

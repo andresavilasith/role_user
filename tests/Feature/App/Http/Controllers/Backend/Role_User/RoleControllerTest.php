@@ -6,9 +6,9 @@ use App\Helpers\DefaultDataSeed;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use App\User;
-use App\Role_User\Models\Role;
 use Illuminate\Support\Facades\Gate;
-use App\Role_User\Models\Permission;
+use App\Models\Role_User\Role;
+use App\Models\Role_User\Permission;
 
 class RoleControllerTest extends TestCase
 {
