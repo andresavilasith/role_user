@@ -16,17 +16,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('layouts.template');
 });
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-
-Route::resource('/user','Backend\Role_User\UserController')->names('user');
-
+Route::resource('/user','Backend\Role_User\UserController',['except'=>['create','store']])->names('user');
 Route::resource('/role','Backend\Role_User\RoleController')->names('role');
-
 Route::resource('/category','Backend\Role_User\CategoryController')->names('category');
-
 Route::resource('/permission','Backend\Role_User\PermissionController')->names('permission');
