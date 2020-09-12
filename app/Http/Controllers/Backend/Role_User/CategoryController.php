@@ -21,7 +21,7 @@ class CategoryController extends Controller
 
         $categories = Category::orderBy('id', 'Desc')->paginate(6);
 
-        return view('category.index', [
+        return view('role_user.category.index', [
             'categories' => $categories
         ]);
     }
@@ -35,7 +35,7 @@ class CategoryController extends Controller
     {
         Gate::authorize('haveaccess', 'category.create');
         
-        return view('category.create');
+        return view('role_user.category.create');
     }
     
     /**
@@ -65,7 +65,7 @@ class CategoryController extends Controller
     {
         Gate::authorize('haveaccess', 'category.show');
 
-        return view('category.show', [
+        return view('role_user.category.show', [
             'category' => $category
         ]);
     }
@@ -79,7 +79,7 @@ class CategoryController extends Controller
     public function edit(Category $category)
     {
         Gate::authorize('haveaccess', 'category.edit');
-        return view('category.edit', compact('category'));
+        return view('role_user.category.edit', compact('category'));
     }
 
     /**

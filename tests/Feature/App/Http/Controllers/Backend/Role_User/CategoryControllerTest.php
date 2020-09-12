@@ -30,7 +30,7 @@ class CategoryControllerTest extends TestCase
         Gate::authorize('haveaccess', 'category.create');
 
 
-        $response->assertViewIs('category.create');
+        $response->assertViewIs('role_user.category.create');
     }
 
     /** @test */
@@ -80,7 +80,7 @@ class CategoryControllerTest extends TestCase
 
         $categories = Category::orderBy('id', 'Desc')->paginate(6);
 
-        $response->assertViewIs('category.index');
+        $response->assertViewIs('role_user.category.index');
 
         $response->assertViewHas('categories', $categories);
     }
@@ -103,7 +103,7 @@ class CategoryControllerTest extends TestCase
 
         $response->assertOk();
 
-        $response->assertViewIs('category.show');
+        $response->assertViewIs('role_user.category.show');
         $response->assertViewHas('category', $category);
     }
 
@@ -125,7 +125,7 @@ class CategoryControllerTest extends TestCase
 
         $response->assertOk();
 
-        $response->assertViewIs('category.edit');
+        $response->assertViewIs('role_user.category.edit');
         $response->assertViewHas('category', $category);
     }
 

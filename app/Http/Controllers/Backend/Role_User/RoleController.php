@@ -22,7 +22,7 @@ class RoleController extends Controller
 
         $roles = Role::orderBy('id', 'Desc')->paginate(6);
 
-        return view('role.index', compact('roles'));
+        return view('role_user.role.index', compact('roles'));
     }
 
     /**
@@ -34,7 +34,7 @@ class RoleController extends Controller
     {
         Gate::authorize('haveaccess', 'role.create');
         $permissions = Permission::all();
-        return view('role.create', [
+        return view('role_user.role.create', [
             'permissions' => $permissions
         ]);
     }
@@ -83,7 +83,7 @@ class RoleController extends Controller
             $permission_role[] = $permission->id;
         }
 
-        return view('role.show', [
+        return view('role_user.role.show', [
             'role' => $role,
             'permissions' => $permissions,
             'permission_role' => $permission_role
@@ -108,7 +108,7 @@ class RoleController extends Controller
             $permission_role[] = $permission->id;
         }
 
-        return view('role.edit', [
+        return view('role_user.role.edit', [
             'role' => $role,
             'permissions' => $permissions,
             'permission_role' => $permission_role

@@ -32,7 +32,7 @@ class UserControllerTest extends TestCase
 
         $users = User::with('roles')->orderBy('id', 'Desc')->paginate(2);
 
-        $response->assertViewIs('user.index');
+        $response->assertViewIs('role_user.user.index');
 
         $response->assertViewHas('users', $users);
     }
@@ -59,7 +59,7 @@ class UserControllerTest extends TestCase
         
         
         
-        $response->assertViewIs('user.show');
+        $response->assertViewIs('role_user.user.show');
         
         $response->assertViewHas('user', $user);
         $response->assertViewHas('roles', $roles);
@@ -86,7 +86,7 @@ class UserControllerTest extends TestCase
 
 
 
-        $response->assertViewIs('user.edit');
+        $response->assertViewIs('role_user.user.edit');
 
         $response->assertViewHas('user', $user);
         $response->assertViewHas('roles', $roles);

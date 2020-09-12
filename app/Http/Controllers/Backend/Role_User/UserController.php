@@ -24,7 +24,7 @@ class UserController extends Controller
         $users = User::with('roles')->orderBy('id', 'Desc')->paginate(2);
 
 
-        return view('user.index', compact('users'));
+        return view('role_user.user.index', compact('users'));
     }
 
     /**
@@ -60,7 +60,7 @@ class UserController extends Controller
 
         $roles = Role::orderBy('name')->get();
 
-        return view('user.show', compact('user', 'roles'));
+        return view('role_user.user.show', compact('user', 'roles'));
     }
 
     /**
@@ -75,7 +75,7 @@ class UserController extends Controller
 
         $roles = Role::orderBy('name')->get();
 
-        return view('user.edit', [
+        return view('role_user.user.edit', [
             'user' => $user,
             'roles' => $roles
         ]);

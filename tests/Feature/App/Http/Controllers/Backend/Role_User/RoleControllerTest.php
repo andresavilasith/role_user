@@ -32,7 +32,7 @@ class RoleControllerTest extends TestCase
 
         $response->assertOk();
 
-        $response->assertViewIs('role.create');
+        $response->assertViewIs('role_user.role.create');
         $response->assertViewHas('permissions', $permissions);
     
     }
@@ -96,7 +96,7 @@ class RoleControllerTest extends TestCase
 
         $roles = Role::orderBy('id', 'Desc')->paginate(6);
 
-        $response->assertViewIs('role.index');
+        $response->assertViewIs('role_user.role.index');
 
         $response->assertViewHas('roles', $roles);
     }
@@ -127,7 +127,7 @@ class RoleControllerTest extends TestCase
 
         $response->assertOk();
 
-        $response->assertViewIs('role.show');
+        $response->assertViewIs('role_user.role.show');
         $response->assertViewHas('role', $role);
         $response->assertViewHas('permissions', $permissions);
         $response->assertViewHas('permission_role', $permission_role);
@@ -161,7 +161,7 @@ class RoleControllerTest extends TestCase
 
         $response->assertOk();
 
-        $response->assertViewIs('role.edit');
+        $response->assertViewIs('role_user.role.edit');
         $response->assertViewHas('role', $role);
         $response->assertViewHas('permissions', $permissions);
         $response->assertViewHas('permission_role', $permission_role);

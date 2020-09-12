@@ -30,7 +30,7 @@ class PermissionControllerTest extends TestCase
 
         $categories = Category::all();
 
-        $response->assertViewIs('permission.create');
+        $response->assertViewIs('role_user.permission.create');
         $response->assertViewHas('categories', $categories);
     }
 
@@ -90,7 +90,7 @@ class PermissionControllerTest extends TestCase
 
         $permissions = Permission::orderBy('id', 'Desc')->paginate(7);
 
-        $response->assertViewIs('permission.index');
+        $response->assertViewIs('role_user.permission.index');
         $response->assertViewHas('permissions', $permissions);
     }
 
@@ -109,7 +109,7 @@ class PermissionControllerTest extends TestCase
 
         Gate::authorize('haveaccess', 'permission.show');
 
-        $response->assertViewIs('permission.show');
+        $response->assertViewIs('role_user.permission.show');
         $response->assertViewHas('permission', $permission);
     }
 
@@ -128,7 +128,7 @@ class PermissionControllerTest extends TestCase
 
         Gate::authorize('haveaccess', 'permission.edit');
 
-        $response->assertViewIs('permission.edit');
+        $response->assertViewIs('role_user.permission.edit');
         $response->assertViewHas('permission', $permission);
     }
 
