@@ -16,12 +16,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('layouts.new.test');
-});
+    return view('layouts.template');
+})->name('home');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('/user','Backend\Role_User\UserController',['except'=>['create','store']])->names('user');
 Route::resource('/role','Backend\Role_User\RoleController')->names('role');
 Route::resource('/category','Backend\Role_User\CategoryController')->names('category');

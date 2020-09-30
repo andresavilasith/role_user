@@ -88,7 +88,7 @@ class PermissionControllerTest extends TestCase
 
         $response->assertOk();
 
-        $permissions = Permission::orderBy('id', 'Desc')->paginate(7);
+        $permissions = Permission::all();
 
         $response->assertViewIs('role_user.permission.index');
         $response->assertViewHas('permissions', $permissions);
@@ -105,12 +105,15 @@ class PermissionControllerTest extends TestCase
 
         $permission = Permission::first();
 
+        $categories = Category::all();
+
         $response = $this->actingAs($user)->get('/permission/' . $permission->id);
 
         Gate::authorize('haveaccess', 'permission.show');
 
         $response->assertViewIs('role_user.permission.show');
         $response->assertViewHas('permission', $permission);
+        $response->assertViewHas('categories', $categories);
     }
 
     /** @test */
@@ -122,6 +125,8 @@ class PermissionControllerTest extends TestCase
 
         $user = User::first();
 
+        $categories = Category::all();
+
         $permission = Permission::first();
 
         $response = $this->actingAs($user)->get('/permission/' . $permission->id . '/edit');
@@ -130,6 +135,7 @@ class PermissionControllerTest extends TestCase
 
         $response->assertViewIs('role_user.permission.edit');
         $response->assertViewHas('permission', $permission);
+        $response->assertViewHas('categories', $categories);
     }
 
     /** @test */
@@ -162,38 +168,36 @@ class PermissionControllerTest extends TestCase
 
         Gate::authorize('haveaccess', 'category.edit');
 
-        $this->assertCount(2,Permission::all());
+        $this->assertCount(2, Permission::all());
 
-        $permission=$permission->fresh();
+        $permission = $permission->fresh();
 
-        $this->assertEquals($permission->category_id,$category_id);
-        $this->assertEquals($permission->name,$name);
-        $this->assertEquals($permission->slug,$slug);
-        $this->assertEquals($permission->description,$description);
+        $this->assertEquals($permission->category_id, $category_id);
+        $this->assertEquals($permission->name, $name);
+        $this->assertEquals($permission->slug, $slug);
+        $this->assertEquals($permission->description, $description);
 
         $response->assertRedirect('/permission');
-
     }
 
 
     /** @test */
-    public function delete_permission_test(){
+    public function delete_permission_test()
+    {
         $this->withoutExceptionHandling();
 
         DefaultDataSeed::default_data_seed();
 
-        $user=User::first();
+        $user = User::first();
 
-        $permission=Permission::latest('id')->first();
+        $permission = Permission::latest('id')->first();
 
-        $response=$this->actingAs($user)->delete('/permission/'.$permission->id);
+        $response = $this->actingAs($user)->delete('/permission/' . $permission->id);
 
         Gate::authorize('haveaccess', 'permission.destroy');
 
-        $this->assertCount(1,Permission::all());
+        $this->assertCount(1, Permission::all());
 
         $response->assertRedirect('/permission');
-
-
     }
 }

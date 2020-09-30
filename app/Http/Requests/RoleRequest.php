@@ -23,18 +23,20 @@ class RoleRequest extends FormRequest
      */
     public function rules()
     {
-        //Ubtener el rol
+        //Ubtener el rol (id)
         $role = $this->route('role');
 
         //Si el rol existe se puede quedar con los mismos datos pero no duplicar los datos de otros
         if ($role) {
             return [
+                //Update
                 'name' => 'required|max:50|unique:roles,name,' . $role->id,
                 'slug' => 'required|max:50|unique:roles,slug,' . $role->id,
                 'full_access' => 'required|in:yes,no',
             ];
         } else {
             return [
+                //Create
                 'name' => 'required|max:50|unique:roles,name',
                 'slug' => 'required|max:50|unique:roles,slug',
                 'full_access' => 'required|in:yes,no',

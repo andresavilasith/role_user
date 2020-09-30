@@ -3,6 +3,7 @@
 namespace Tests\Feature\App\Http\Controllers\Backend\Role_User;
 
 use App\Helpers\DefaultDataSeed;
+use App\Models\Role_User\Category;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use App\User;
@@ -26,15 +27,14 @@ class RoleControllerTest extends TestCase
 
         $response = $this->actingAs($user)->get('/role/create');
 
-        Gate::authorize('haveaccess', 'role.show');
+        Gate::authorize('haveaccess', 'role.create');
 
-        $permissions = Permission::all();
-
+        $categories = Category::with('permissions')->get();
+        
         $response->assertOk();
 
         $response->assertViewIs('role_user.role.create');
-        $response->assertViewHas('permissions', $permissions);
-    
+        $response->assertViewHas('categories', $categories);
     }
 
     /** @test */
@@ -66,10 +66,10 @@ class RoleControllerTest extends TestCase
         $this->assertCount(2, Role::all());
         $role = Role::latest('id')->first();
 
-        
+
         $role->permissions()->sync($five_permissions);
 
-        
+
         $this->assertEquals($role->name, $name);
         $this->assertEquals($role->slug, $slug);
         $this->assertEquals($role->description, $description);
@@ -94,7 +94,7 @@ class RoleControllerTest extends TestCase
 
         $response->assertOk();
 
-        $roles = Role::orderBy('id', 'Desc')->paginate(6);
+        $roles = Role::all();
 
         $response->assertViewIs('role_user.role.index');
 
@@ -116,20 +116,22 @@ class RoleControllerTest extends TestCase
 
         Gate::authorize('haveaccess', 'role.show');
 
-        $permissions = Permission::all();
+        $categories = Category::with('permissions')->get();
+
 
         $permission_role = [];
-
-
+      
         foreach ($role->permissions as $permission) {
             $permission_role[] = $permission->id;
         }
+        
+
 
         $response->assertOk();
 
         $response->assertViewIs('role_user.role.show');
         $response->assertViewHas('role', $role);
-        $response->assertViewHas('permissions', $permissions);
+        $response->assertViewHas('categories', $categories);
         $response->assertViewHas('permission_role', $permission_role);
     }
 
@@ -152,6 +154,8 @@ class RoleControllerTest extends TestCase
 
         $permissions = Permission::all();
 
+        $categories = Category::with('permissions')->get();
+
         $permission_role = array();
 
         foreach ($role->permissions as $permission) {
@@ -164,6 +168,7 @@ class RoleControllerTest extends TestCase
         $response->assertViewIs('role_user.role.edit');
         $response->assertViewHas('role', $role);
         $response->assertViewHas('permissions', $permissions);
+        $response->assertViewHas('categories', $categories);
         $response->assertViewHas('permission_role', $permission_role);
     }
 
@@ -203,7 +208,7 @@ class RoleControllerTest extends TestCase
         $this->assertEquals($role->description, 'new role');
         $this->assertEquals($role->full_access, 'no');
 
-        $response->assertRedirect('/role/' . $role->id);
+        $response->assertRedirect('/role');
     }
 
     /** @test */

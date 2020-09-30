@@ -20,9 +20,9 @@ class PermissionController extends Controller
     {
         Gate::authorize('haveaccess', 'permission.index');
 
-        $permissions = Permission::orderBy('id', 'Desc')->paginate(7);
+        $permissions = Permission::all();
 
-        return view('role_user.permission.index', compact('permissions'));
+        return view('role_user.permission.index', compact('permissions'))->with('status_success', 'Permission updated successfully');
     }
 
     /**
@@ -70,8 +70,12 @@ class PermissionController extends Controller
     public function show(Permission $permission)
     {
         Gate::authorize('haveaccess', 'permission.show');
+
+        $categories = Category::all();
+
         return view('role_user.permission.show', [
-            'permission' => $permission
+            'permission' => $permission,
+            'categories' => $categories
         ]);
     }
 
@@ -84,8 +88,10 @@ class PermissionController extends Controller
     public function edit(Permission $permission)
     {
         Gate::authorize('haveaccess', 'permission.edit');
-        return view('role_user.permission.edit',[
-            'permission'=>$permission
+        $categories = Category::all();
+        return view('role_user.permission.edit', [
+            'permission' => $permission,
+            'categories' => $categories
         ]);
     }
 
@@ -107,7 +113,6 @@ class PermissionController extends Controller
         ]);
 
         return redirect('/permission');
-
     }
 
     /**

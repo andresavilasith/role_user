@@ -1,0 +1,19 @@
+.content-wrapper{
+    min-height: 580px !important;
+}
+
+.img_user_edit{
+    width: 100px;
+    border-radius: 10px;
+}
+
+.user-panel img{
+    height: 35px !important;
+    width: 35px !important;
+}
+
+.nav-img{
+    height: 25px !important;
+    width: 25px !important;
+    border-radius: 20px;
+}

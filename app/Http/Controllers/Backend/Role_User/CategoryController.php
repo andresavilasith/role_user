@@ -19,11 +19,11 @@ class CategoryController extends Controller
     {
         Gate::authorize('haveaccess', 'category.index');
 
-        $categories = Category::orderBy('id', 'Desc')->paginate(6);
+        $categories = Category::all();
 
         return view('role_user.category.index', [
             'categories' => $categories
-        ]);
+        ])->with('status_success', 'Permission updated successfully');
     }
 
     /**

@@ -78,7 +78,7 @@ class CategoryControllerTest extends TestCase
 
         $response->assertOk();
 
-        $categories = Category::orderBy('id', 'Desc')->paginate(6);
+        $categories = Category::all();
 
         $response->assertViewIs('role_user.category.index');
 

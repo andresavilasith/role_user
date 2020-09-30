@@ -30,11 +30,12 @@ class UserControllerTest extends TestCase
 
         Gate::authorize('haveaccess', 'user.index');
 
-        $users = User::with('roles')->orderBy('id', 'Desc')->paginate(2);
+        $users = User::with('roles')->get();
 
         $response->assertViewIs('role_user.user.index');
 
         $response->assertViewHas('users', $users);
+        
     }
 
 
@@ -145,7 +146,7 @@ class UserControllerTest extends TestCase
 
 
 
-        $response->assertRedirect('/user/' . $user->id);
+        $response->assertRedirect('/user');
     }
 
 
@@ -160,8 +161,8 @@ class UserControllerTest extends TestCase
 
         $response = $this->actingAs($user)->put('/user/' . $user->id, [
             'name' => 'update user',
-            'email' => 'update@update.com'
-
+            'email' => 'update@update.com',
+            'img'=>'users/user.png'
         ]);
 
         Gate::authorize('update', [$user, ['user.edit', 'userown.edit']]);
@@ -174,7 +175,7 @@ class UserControllerTest extends TestCase
         $this->assertEquals($user->name, 'update user');
         $this->assertEquals($user->email, 'update@update.com');
 
-        $response->assertRedirect('/user/' . $user->id);
+        $response->assertRedirect('/user');
     }
 
 

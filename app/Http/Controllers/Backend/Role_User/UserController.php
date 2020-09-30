@@ -8,6 +8,7 @@ use App\Models\Role_User\Role;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -21,10 +22,15 @@ class UserController extends Controller
         Gate::authorize('haveaccess', 'user.index');
 
         //Con el with trae el usuario con pivot es decir con los roles que tiene el usuario
-        $users = User::with('roles')->orderBy('id', 'Desc')->paginate(2);
+        $users = User::with('roles')->get();
 
+        $user_identified = [];
 
-        return view('role_user.user.index', compact('users'));
+        foreach ($users as $us) {
+            $user_identified[] = $us;
+        }
+
+        return view('role_user.user.index', compact('users', 'user_identified'));
     }
 
     /**
@@ -91,21 +97,33 @@ class UserController extends Controller
     public function update(UserRequest $request, User $user)
     {
         $this->authorize('update', [$user, ['user.edit', 'userown.edit']]);
-        //Gate::authorize('haveaccess', 'user.edit');
+
+        
+
+
+        //Eliminar Imagen
+        if ($request->file('file')) {
+
+            //Eliminar imagen
+            Storage::disk('public')->delete($user->img);
+
+
+            //La imgn se guarda en la carpeta de allmacenamiento storage/public
+            $user->img = $request->file('file')->store('users', 'public');
+        }
 
         $user->update([
             'name' => $request->name,
-            'email' => $request->email
+            'email' => $request->email,
+            'img' => $request->img
         ]);
-
-
 
         if ($request->get('roles')) {
             $user->roles()->sync($request->get('roles'));
         }
 
 
-        return redirect()->route('user.show', $user->id)->with('status_success', 'User updated successfully');
+        return redirect()->route('user.index')->with('status_success', 'User updated successfully');
     }
 
     /**

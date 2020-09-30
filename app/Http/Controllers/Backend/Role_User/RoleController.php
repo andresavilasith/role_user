@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend\Role_User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RoleRequest;
+use App\Models\Role_User\Category;
 use App\Models\Role_User\Permission;
 use App\Models\Role_User\Role;
 use Illuminate\Http\Request;
@@ -20,9 +21,9 @@ class RoleController extends Controller
     {
         Gate::authorize('haveaccess', 'role.index');
 
-        $roles = Role::orderBy('id', 'Desc')->paginate(6);
+        $roles = Role::all();
 
-        return view('role_user.role.index', compact('roles'));
+        return view('role_user.role.index', compact('roles'))->with('status_success', 'Role updated successfully');
     }
 
     /**
@@ -33,9 +34,10 @@ class RoleController extends Controller
     public function create()
     {
         Gate::authorize('haveaccess', 'role.create');
-        $permissions = Permission::all();
+     
+        $categories = Category::with('permissions')->get();
         return view('role_user.role.create', [
-            'permissions' => $permissions
+            'categories' => $categories
         ]);
     }
 
@@ -75,7 +77,8 @@ class RoleController extends Controller
     {
         Gate::authorize('haveaccess', 'role.show');
 
-        $permissions = Permission::all();
+        $categories = Category::with('permissions')->get();
+
 
         $permission_role = [];
 
@@ -83,9 +86,10 @@ class RoleController extends Controller
             $permission_role[] = $permission->id;
         }
 
+
         return view('role_user.role.show', [
             'role' => $role,
-            'permissions' => $permissions,
+            'categories' => $categories,
             'permission_role' => $permission_role
         ]);
     }
@@ -102,6 +106,8 @@ class RoleController extends Controller
 
         $permissions = Permission::all();
 
+        $categories = Category::with('permissions')->get();
+
         $permission_role = [];
 
         foreach ($role->permissions as $permission) {
@@ -111,6 +117,7 @@ class RoleController extends Controller
         return view('role_user.role.edit', [
             'role' => $role,
             'permissions' => $permissions,
+            'categories' => $categories,
             'permission_role' => $permission_role
         ]);
     }
@@ -139,7 +146,7 @@ class RoleController extends Controller
         }
 
 
-        return redirect()->route('role.show', $role->id)->with('status_success', 'Role updated successfully');
+        return redirect()->route('role.index')->with('status_success', 'Role updated successfully');
     }
 
     /**
