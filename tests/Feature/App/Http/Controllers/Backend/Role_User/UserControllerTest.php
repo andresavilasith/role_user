@@ -9,6 +9,8 @@ use App\User;
 use Illuminate\Support\Facades\Gate;
 use App\Helpers\DefaultDataSeed;
 use App\Models\Role_User\Role;
+use Illuminate\Http\UploadedFile as HttpUploadedFile;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class UserControllerTest extends TestCase
 {
@@ -162,7 +164,7 @@ class UserControllerTest extends TestCase
         $response = $this->actingAs($user)->put('/user/' . $user->id, [
             'name' => 'update user',
             'email' => 'update@update.com',
-            'img'=>'users/user.png'
+            'img'=> HttpUploadedFile::fake()->image('image.jpg')
         ]);
 
         Gate::authorize('update', [$user, ['user.edit', 'userown.edit']]);

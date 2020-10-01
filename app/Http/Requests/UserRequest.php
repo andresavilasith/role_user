@@ -31,7 +31,7 @@ class UserRequest extends FormRequest
             return [
                 'name' => 'required|max:50|unique:users,name,' . $user->id,
                 'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,'. $user->id],
-                'img' => 'string'
+                'img' => 'mimes:jpeg,png,jpg,gif,svg'
             ];
         }
     }
