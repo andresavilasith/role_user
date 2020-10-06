@@ -1,15 +1,15 @@
-#Laravel 7 Sistema de roles y permisos
+# Laravel 7 Sistema de roles y permisos
 
 >Basado en el sistema de roles y permisos de [Jhonatan David Fernandez Rosa(You Tube)](https://www.youtube.com/playlist?list=PLtg6DxcGyHSvB6xvQbacVfL83UoFEvOGz)
 
-###Mejoras implementadas:
+### Mejoras implementadas:
 
-- [x]TDD(Feature test driven development)
-- [x]Uso de la plantilla [Adminlte](https://github.com/ColorlibHQ/AdminLTE/releases/tag/v3.0.5) - Datatables.js
-- [x]Creación de tabla categories para mejor organización de permisos
-- [x]Uso de nav tabs para asignación, vista y modificación de permisos(Gestión de roles)
+- [x] TDD(Feature test driven development)
+- [x] Uso de la plantilla [Adminlte](https://github.com/ColorlibHQ/AdminLTE/releases/tag/v3.0.5) - Datatables.js
+- [x] Creación de tabla categories para mejor organización de permisos
+- [x] Uso de nav tabs para asignación, vista y modificación de permisos(Gestión de roles)
 
-##Instalacion  
+## Instalacion  
 1. Instalar [Wamp(Solo Windows)](https://www.wampserver.com/en/) , [Xampp](https://www.apachefriends.org/es/index.html) u otro segun su preferencia 
 2. Instalar composer [Descargar composer](https://getcomposer.org/download/)
 3. Clonar el repositorio en el directorio de tu eleccion
@@ -24,14 +24,14 @@
    * DB_DATABASE=Nombre de Base De Datos Creada En phpMyAdmin
    * DB_USERNAME=Nombre de Usuario en phpMyAdmin
    * DB_PASSWORD=Contraseña en phpMyAdmin
-####En mi caso es:
+#### En mi caso es:
 
-    * DB_CONNECTION=mysql
-    * DB_HOST=127.0.0.1
-    * DB_PORT=3306    
-    * DB_DATABASE=inven 
-    * DB_USERNAME=root    
-    * DB_PASSWORD=
+   * DB_CONNECTION=mysql
+   * DB_HOST=127.0.0.1
+   * DB_PORT=3306    
+   * DB_DATABASE=inven 
+   * DB_USERNAME=root    
+   * DB_PASSWORD=
 7. Generar una nueva llave de laravel con el comando:
 >php artisan key:generate
 
