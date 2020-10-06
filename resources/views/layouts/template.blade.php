@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title> Inven @yield('title')</title>
+  <title> Sistem @yield('title')</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Styles -->
@@ -52,7 +52,6 @@
         @else
         <li class="nav-item dropdown">
           <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-            <img src="{{Auth::user()->get_img}}" class="nav-img" alt="User Image">
             {{ Auth::user()->name }} <span class="caret"></span>
           </a>
 
@@ -74,32 +73,6 @@
           </div>
         </li>
         @endguest
-        <li class="nav-item dropdown">
-          <a class="nav-link" data-toggle="dropdown" href="#">
-            <i class="fas fa-th-large"></i>
-            <span class="badge badge-warning navbar-badge">15</span>
-          </a>
-          <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-            <span class="dropdown-item dropdown-header">15 Notifications</span>
-            <div class="dropdown-divider"></div>
-            <a href="#" class="dropdown-item">
-              <i class="fas fa-envelope mr-2"></i> 4 new messages
-              <span class="float-right text-muted text-sm">3 mins</span>
-            </a>
-            <div class="dropdown-divider"></div>
-            <a href="#" class="dropdown-item">
-              <i class="fas fa-users mr-2"></i> 8 friend requests
-              <span class="float-right text-muted text-sm">12 hours</span>
-            </a>
-            <div class="dropdown-divider"></div>
-            <a href="#" class="dropdown-item">
-              <i class="fas fa-file mr-2"></i> 3 new reports
-              <span class="float-right text-muted text-sm">2 days</span>
-            </a>
-            <div class="dropdown-divider"></div>
-            <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
-          </div>
-        </li>
       </ul>
 
     </nav>
@@ -122,9 +95,7 @@
         <!-- Sidebar user panel (optional) -->
         <a href="{{ route('user.edit', Auth::user()->id) }}" class="d-block">
           <div class="user-panel mt-2 pb-2 mb-2 d-flex">
-            <div class="image mr-2">
-              <img src="{{Auth::user()->get_img}}" class="img-circle elevation-2" alt="User Image">
-            </div>
+            
             <div class="info">
               {{ Auth::user()->name }}
 

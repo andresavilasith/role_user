@@ -49,18 +49,6 @@
                                 </div>
 
 
-                                <div class="form-group">
-                                    <label>Image</label>
-                                    <input type="file" name="file" class="form-control">
-                                </div>
-
-                                @if($user->img)
-                                <img src="{{$user->get_img}}" class="img_user_edit">
-                                @else
-                                No avatar
-                                @endif
-
-
                                 <hr>
 
 

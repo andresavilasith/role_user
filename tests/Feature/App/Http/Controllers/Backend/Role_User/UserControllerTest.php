@@ -163,8 +163,7 @@ class UserControllerTest extends TestCase
 
         $response = $this->actingAs($user)->put('/user/' . $user->id, [
             'name' => 'update user',
-            'email' => 'update@update.com',
-            'img'=> HttpUploadedFile::fake()->image('image.jpg')
+            'email' => 'update@update.com'
         ]);
 
         Gate::authorize('update', [$user, ['user.edit', 'userown.edit']]);

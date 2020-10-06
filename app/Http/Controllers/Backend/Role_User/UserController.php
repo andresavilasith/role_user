@@ -98,24 +98,9 @@ class UserController extends Controller
     {
         $this->authorize('update', [$user, ['user.edit', 'userown.edit']]);
 
-        
-
-
-        //Eliminar Imagen
-        if ($request->file('file')) {
-
-            //Eliminar imagen
-            Storage::disk('public')->delete($user->img);
-
-
-            //La imgn se guarda en la carpeta de allmacenamiento storage/public
-            $user->img = $request->file('file')->store('users', 'public');
-        }
-
         $user->update([
             'name' => $request->name,
-            'email' => $request->email,
-            'img' => $request->img
+            'email' => $request->email
         ]);
 
         if ($request->get('roles')) {
