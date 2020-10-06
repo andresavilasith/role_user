@@ -7,7 +7,6 @@
     <div class="row justify-content-center">
         <div class="col-md-12 mt-3">
             <div class="card">
-            @include('role_user.custom.message')
                 <div class="card-header">
                     <h2 class="text-center">
                         List Of roles
