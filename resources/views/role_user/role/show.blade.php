@@ -15,30 +15,30 @@
 
                 <div class="card-body">
                     <div class="form-group">
-                        <input type="text" class="form-control" id="name" name="name" placeholder="name" value="{!! old('name',$role->name) !!}" required>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="name" value="{!! old('name',$role->name) !!}" required disabled>
                     </div>
 
 
                     <div class="form-group">
-                        <input type="text" class="form-control" id="slug" name="slug" placeholder="slug" value="{!! old('slug',$role->slug) !!}" required>
+                        <input type="text" class="form-control" id="slug" name="slug" placeholder="slug" value="{!! old('slug',$role->slug) !!}" required disabled>
                     </div>
 
 
                     <div class="form-group">
-                        <textarea name="description" id="description" class="form-control" placeholder="Description">{!! old('description',$role->description) !!}</textarea>
+                        <textarea name="description" id="description" class="form-control" placeholder="Description" disabled>{!! old('description',$role->description) !!}</textarea>
                     </div>
 
                     <hr>
                     <h3>Full Access</h3>
                     <div class="custom-control custom-radio">
-                        <input type="radio" id="fullaccessyes" name="full_access" class="custom-control-input" value="yes" @if($role['full_access']=='yes' ) checked @elseif(old('full_access')=='yes' ) checked @endif>
+                        <input type="radio" id="fullaccessyes" name="full_access" class="custom-control-input" value="yes" disabled @if($role['full_access']=='yes' ) checked @elseif(old('full_access')=='yes' ) checked @endif>
 
 
 
                         <label class="custom-control-label" for="fullaccessyes">Yes</label>
                     </div>
                     <div class="custom-control custom-radio">
-                        <input type="radio" id="fullaccessno" name="full_access" class="custom-control-input" value="no" @if($role['full_access']=='no' ) checked @elseif(old('full_access')=='no' ) checked @endif>
+                        <input type="radio" id="fullaccessno" name="full_access" class="custom-control-input" value="no" disabled @if($role['full_access']=='no' ) checked @elseif(old('full_access')=='no' ) checked @endif>
                         <label class="custom-control-label" for="fullaccessno">No</label>
                     </div>
 
