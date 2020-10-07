@@ -6,7 +6,7 @@
 
 - [x] TDD(Feature test driven development)
 - [x] Uso de la plantilla [Adminlte](https://github.com/ColorlibHQ/AdminLTE/releases/tag/v3.0.5) - Datatables.js
-- [x] Creación de tabla categories para mejor organización de permisos
+- [x] Creación de tabla categories (Base de datos) para mejor organización de permisos
 - [x] Uso de nav tabs para asignación, vista y modificación de permisos(Gestión de roles)
 
 ## Instalacion  
