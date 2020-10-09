@@ -4,7 +4,7 @@
 
 ### Mejoras implementadas:
 
-- [x] TDD(Feature test driven development)
+- [x] TDD(Feature test driven development) [Tutorial de Alfredo Mendoza](https://youtu.be/_GwqxAi_ly0)
 - [x] Uso de la plantilla [Adminlte](https://github.com/ColorlibHQ/AdminLTE/releases/tag/v3.0.5) - Datatables.js
 - [x] Creación de tabla categories (Base de datos) para mejor organización de permisos
 - [x] Uso de nav tabs para asignación, vista y modificación de permisos(Gestión de roles)
