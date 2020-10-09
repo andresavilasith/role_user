@@ -8,6 +8,7 @@
 - [x] Uso de la plantilla [Adminlte](https://github.com/ColorlibHQ/AdminLTE/releases/tag/v3.0.5) - Datatables.js
 - [x] Creación de tabla categories (Base de datos) para mejor organización de permisos
 - [x] Uso de nav tabs para asignación, vista y modificación de permisos(Gestión de roles)
+- [x] Validacion de datos mediante Request en formularios
 
 ## Instalacion  
 1. Instalar [Wamp(Solo Windows)](https://www.wampserver.com/en/) , [Xampp](https://www.apachefriends.org/es/index.html) u otro segun su preferencia 
