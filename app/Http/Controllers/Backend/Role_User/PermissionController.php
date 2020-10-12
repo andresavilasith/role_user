@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Backend\Role_User;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\PermissionRequest;
 use App\Models\Role_User\Category;
 use App\Models\Role_User\Permission;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use App\Http\Requests\Role_User\Permission\PermissionStoreRequest;
+use App\Http\Requests\Role_User\Permission\PermissionUpdateRequest;
 
 class PermissionController extends Controller
 {
@@ -47,9 +47,8 @@ class PermissionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(PermissionRequest $request)
+    public function store(PermissionStoreRequest $request)
     {
-        Gate::authorize('haveaccess', 'permission.create');
 
         Permission::create([
             'category_id' => $request->category_id,
@@ -102,9 +101,9 @@ class PermissionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(PermissionRequest $request, Permission $permission)
+    public function update(PermissionUpdateRequest $request, Permission $permission)
     {
-        Gate::authorize('haveaccess', 'permission.edit');
+        
         $permission->update([
             'category_id' => $request->category_id,
             'name' => $request->name,

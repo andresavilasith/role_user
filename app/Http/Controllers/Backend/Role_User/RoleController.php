@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Backend\Role_User;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\RoleRequest;
 use App\Models\Role_User\Category;
 use App\Models\Role_User\Permission;
 use App\Models\Role_User\Role;
-use Illuminate\Http\Request;
+use App\Http\Requests\Role_User\Role\RoleStoreRequest;
+use App\Http\Requests\Role_User\Role\RoleUpdateRequest;
 use Illuminate\Support\Facades\Gate;
 
 class RoleController extends Controller
@@ -47,10 +47,8 @@ class RoleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(RoleRequest $request)
+    public function store(RoleStoreRequest $request)
     {
-        Gate::authorize('haveaccess', 'role.create');
-
         $role = Role::create([
             'name' => $request->name,
             'slug' => $request->slug,
@@ -129,10 +127,8 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(RoleRequest $request, Role $role)
+    public function update(RoleUpdateRequest $request, Role $role)
     {
-        Gate::authorize('haveaccess', 'role.edit');
-
         $role->update([
             'name' => $request->name,
             'slug' => $request->slug,

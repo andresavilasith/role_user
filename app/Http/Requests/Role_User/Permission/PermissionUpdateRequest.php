@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Role_User\Permission;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
 
-class PermissionRequest extends FormRequest
+class PermissionUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,6 +14,7 @@ class PermissionRequest extends FormRequest
      */
     public function authorize()
     {
+        Gate::authorize('haveaccess', 'permission.edit');
         return true;
     }
 
@@ -25,20 +27,13 @@ class PermissionRequest extends FormRequest
     {
         //Obtener el rol
         $permission = $this->route('permission');
-        
-
+ 
         //Si el rol existe se puede quedar con los mismos datos pero no duplicar los datos de otros
         if ($permission) {
             return [
                 'name' => 'required|max:50|unique:permissions,name,' . $permission->id,
                 'slug' => 'required|max:50|unique:permissions,slug,' . $permission->id,
                 'description' => 'required|max:50|unique:permissions,description,' . $permission->id,
-            ];
-        } else {
-            return [
-                'name' => 'required|max:50|unique:permissions,name',
-                'slug' => 'required|max:50|unique:permissions,slug',
-                'description' => 'required|max:50|unique:permissions,description',
             ];
         }
     }

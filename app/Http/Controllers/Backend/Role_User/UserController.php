@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Backend\Role_User;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\UserRequest;
+use App\Http\Requests\Role_User\User\UserUpdateRequest;
 use App\Models\Role_User\Role;
 use App\User;
 use Illuminate\Http\Request;
@@ -94,9 +94,8 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UserRequest $request, User $user)
+    public function update(UserUpdateRequest $request, User $user)
     {
-        $this->authorize('update', [$user, ['user.edit', 'userown.edit']]);
 
         $user->update([
             'name' => $request->name,

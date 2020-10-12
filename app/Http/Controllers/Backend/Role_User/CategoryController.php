@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Backend\Role_User;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\CategoryRequest;
 use App\Models\Role_User\Category;
-use Illuminate\Http\Request;
+use App\Http\Requests\Role_User\Category\CategoryStoreRequest;
+use App\Http\Requests\Role_User\Category\CategoryUpdateRequest;
 use Illuminate\Support\Facades\Gate;
 
 class CategoryController extends Controller
@@ -44,9 +44,8 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CategoryRequest $request)
+    public function store(CategoryStoreRequest $request)
     {
-        Gate::authorize('haveaccess', 'category.create');
         Category::create([
             'name' => $request->name,
             'description' => $request->description
@@ -89,9 +88,9 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(CategoryRequest $request, Category $category)
+    public function update(CategoryUpdateRequest $request, Category $category)
     {
-        Gate::authorize('haveaccess', 'category.edit');
+        
         $category->update([
             'name'=>$request->name,
             'description'=>$request->description,

@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Role_User\Category;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Gate;
 
-class CategoryRequest extends FormRequest
+class CategoryUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,6 +14,7 @@ class CategoryRequest extends FormRequest
      */
     public function authorize()
     {
+        Gate::authorize('haveaccess', 'category.edit');
         return true;
     }
 
@@ -31,11 +33,6 @@ class CategoryRequest extends FormRequest
             return [
                 'name' => 'required|max:50|unique:categories,name,' . $category->id,
                 'description' => 'required|max:50|unique:categories,description,' . $category->id,
-            ];
-        } else {
-            return [
-                'name' => 'required|max:50|unique:categories,name',
-                'description' => 'required|max:50|unique:categories,description',
             ];
         }
     }
