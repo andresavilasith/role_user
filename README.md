@@ -17,7 +17,7 @@
 >git clone https://github.com/andres6266/role_user
 4. Instalar composer  
 >composer install 
-5. Cambiar el nombre del archivo **.env.example** a **.env**
+5. Cambiar el nombre del archivo **.env.example** _(Si esta como **env.example**)_ a **.env**
 7. Crear una base de datos en phpMyAdmin y configurar el archivo .env 
    * DB_CONNECTION=mysql
    * DB_HOST=127.0.0.1   
