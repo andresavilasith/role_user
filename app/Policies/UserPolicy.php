@@ -2,7 +2,7 @@
 
 namespace App\Policies;
 
-use App\User;
+use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 //$usera=Usuario Autenticado
 //$user= Usuario a modificar
@@ -14,7 +14,7 @@ class UserPolicy
     /**
      * Determine whether the user can view any models.
      *
-     * @param  \App\User  $usera
+     * @param  \App\Models\User  $usera
      * @return mixed
      */
     public function viewAny(User $usera)
@@ -25,8 +25,8 @@ class UserPolicy
     /**
      * Determine whether the user can view the model.
      *
-     * @param  \App\User  $usera
-     * @param  \App\User  $user
+     * @param  \App\Models\User  $usera
+     * @param  \App\Models\User  $user
      * @return mixed
      */
     public function view(User $usera, User $user, $perm = null)
@@ -47,7 +47,7 @@ class UserPolicy
     /**
      * Determine whether the user can create models.
      *
-     * @param  \App\User  $usera
+     * @param  \App\Models\User  $usera
      * @return mixed
      */
     public function create(User $usera)
@@ -58,8 +58,8 @@ class UserPolicy
     /**
      * Determine whether the user can update the model.
      *
-     * @param  \App\User  $usera
-     * @param  \App\User  $user
+     * @param  \App\Models\User  $usera
+     * @param  \App\Models\User  $user
      * @return mixed
      */
     public function update(User $usera, User $user, $perm = null)
@@ -80,8 +80,8 @@ class UserPolicy
     /**
      * Determine whether the user can delete the model.
      *
-     * @param  \App\User  $usera
-     * @param  \App\User  $user
+     * @param  \App\Models\User  $usera
+     * @param  \App\Models\User  $user
      * @return mixed
      */
     public function delete(User $usera, User $user)
@@ -92,8 +92,8 @@ class UserPolicy
     /**
      * Determine whether the user can restore the model.
      *
-     * @param  \App\User  $usera
-     * @param  \App\User  $user
+     * @param  \App\Models\User  $usera
+     * @param  \App\Models\User  $user
      * @return mixed
      */
     public function restore(User $usera, User $user)
@@ -104,8 +104,8 @@ class UserPolicy
     /**
      * Determine whether the user can permanently delete the model.
      *
-     * @param  \App\User  $usera
-     * @param  \App\User  $user
+     * @param  \App\Models\User  $usera
+     * @param  \App\Models\User  $user
      * @return mixed
      */
     public function forceDelete(User $usera, User $user)

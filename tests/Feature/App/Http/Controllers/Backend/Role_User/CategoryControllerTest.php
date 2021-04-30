@@ -3,14 +3,13 @@
 namespace Tests\Feature\App\Http\Controllers\Backend\Role_User;
 
 use App\Helpers\DefaultDataSeed;
-use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Gate;
 use Tests\TestCase;
 use App\Models\Role_User\Category;
 use App\Models\Role_User\Role;
-
+use App\Models\User;
 
 class CategoryControllerTest extends TestCase
 {

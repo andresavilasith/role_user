@@ -3,7 +3,7 @@
 use App\Models\Role_User\Category;
 use App\Models\Role_User\Permission;
 use App\Models\Role_User\Role;
-use App\User;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;

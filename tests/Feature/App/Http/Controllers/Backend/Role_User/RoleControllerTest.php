@@ -6,10 +6,10 @@ use App\Helpers\DefaultDataSeed;
 use App\Models\Role_User\Category;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
-use App\User;
 use Illuminate\Support\Facades\Gate;
 use App\Models\Role_User\Role;
 use App\Models\Role_User\Permission;
+use App\Models\User;
 
 class RoleControllerTest extends TestCase
 {
@@ -194,7 +194,7 @@ class RoleControllerTest extends TestCase
         Gate::authorize('haveaccess', 'role.edit');
 
 
-        factory(Permission::class, 9)->create();
+        Permission::factory()->count(9)->make();
         $last_permission = Permission::find(10);
 
         $role->permissions()->sync($last_permission);

@@ -1,4 +1,16 @@
-# Laravel 7 Sistema de roles y permisos
+# Laravel 8 Sistema de roles y permisos
+# PHP version 8.0.1
+
+>Para que funcione correctamente deberias tener instalado PHP 8.0.1 
+
+## Cambiar la version de php del proyecto
+>Se puede entrar en el archivo composer.json y escribir su version de php que tiene que ser superior o igual a 7.3.0 y reemplazar por la version 8.0.1
+```php
+   "require": {
+        "php": "^7.3.0",
+    },
+```
+
 
 >Basado en el sistema de roles y permisos de [Jhonatan David Fernandez Rosa(You Tube)](https://www.youtube.com/playlist?list=PLtg6DxcGyHSvB6xvQbacVfL83UoFEvOGz)
 
