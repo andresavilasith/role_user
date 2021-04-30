@@ -1,4 +1,5 @@
 <?php
+namespace Database\Seeders;
 
 use App\Models\Role_User\Category;
 use App\Models\Role_User\Permission;
