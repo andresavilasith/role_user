@@ -5,10 +5,10 @@ namespace Tests\Feature\App\Http\Controllers\Backend\Role_User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
-use App\User;
 use Illuminate\Support\Facades\Gate;
 use App\Helpers\DefaultDataSeed;
 use App\Models\Role_User\Role;
+use App\Models\User;
 use Illuminate\Http\UploadedFile as HttpUploadedFile;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
@@ -105,7 +105,7 @@ class UserControllerTest extends TestCase
 
         $user = User::first();
 
-        factory(Role::class, 1)->create(
+        Role::factory()->create(
             [
                 'name' => 'guest',
                 'slug' => 'guest',

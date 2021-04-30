@@ -3,10 +3,10 @@
 namespace App\Helpers;
 
 use Illuminate\Support\Facades\DB;
-use App\User;
 use App\Models\Role_User\Role;
 use App\Models\Role_User\Category;
 use App\Models\Role_User\Permission;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class DefaultDataSeed
@@ -15,14 +15,14 @@ class DefaultDataSeed
 
     public static function default_data_seed()
     {
-        factory(User::class, 1)->create([
+        User::factory()->create([
             'name' => 'super admin',
             'email' => 'admin@admin.com',
             'password' => bcrypt('1234')
         ]);
 
 
-        factory(Role::class, 1)->create(
+        Role::factory()->create(
             [
                 'name' => 'admin',
                 'slug' => 'admin',
@@ -33,12 +33,13 @@ class DefaultDataSeed
 
         $role = Role::first();
 
-        factory(Category::class, 2)->create();
-
-
+        Category::factory()->count(2)->create();
+        
+        
         $category=Category::first();
-
-        factory(Permission::class, 2)->create();
+        
+        
+        Permission::factory()->times(2)->create();
 
         $permissions = Permission::all();
 

@@ -5,7 +5,7 @@ namespace Tests\Feature\App\Http\Controllers\Backend\Role_User;
 use App\Helpers\DefaultDataSeed;
 use App\Models\Role_User\Category;
 use App\Models\Role_User\Permission;
-use App\User;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Gate;
