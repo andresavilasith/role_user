@@ -4,7 +4,7 @@
 >Para que funcione correctamente deberias tener instalado PHP 8.0.1 
 
 ## Cambiar la version de php del proyecto
->Se puede entrar en el archivo composer.json y escribir su version de php que tiene que ser superior o igual a 7.3.0 y reemplazar por la version 8.0.1
+>Se puede entrar en el archivo composer.json y escribir su version de php que tiene que ser superior o igual a 7.3.0 y reemplazar a la version 8.0.1
 ```php
    "require": {
         "php": "^7.3.0",
