@@ -30,7 +30,7 @@
 2. Instalar composer [Descargar composer](https://getcomposer.org/download/)
 3. Clonar el repositorio en el directorio de tu eleccion
 ```
-git clone https://github.com/andres6266/role_user
+git clone https://github.com/andresaviladw/role_user.git
 ```
 4. Instalar composer  
 ```
